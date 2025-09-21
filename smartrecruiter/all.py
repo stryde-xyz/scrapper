@@ -45,7 +45,7 @@ class SmartRecruiterAll:
             self._prev_jobs = [job['id'] for job in self.jobs]
 
 
-            sleep(10)
+            sleep(60)
 
     def get_job(self, job_id, api_url):
         try:
