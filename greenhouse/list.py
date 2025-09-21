@@ -13,9 +13,12 @@ class GreenHouseList:
 
     def start(self):
         while True:
-            for company in self._companies:
-                self.process_company(company)
-                sleep(0.1)
+            try:
+                for company in self._companies:
+                    self.process_company(company)
+                    sleep(0.1)
+            except Exception as e:
+                print(f"Error processing {e}")
 
 
     def process_company(self, company):
