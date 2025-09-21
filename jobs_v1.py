@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import os
 import html
 from dateutil import parser
+from time import sleep
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
@@ -47,9 +48,14 @@ try:
 
                     session.add(_job_to_add)
                     print(f"added {_job_to_add.id}")
-                    session.commit()
+                    sleep(0.1)
+
                 except Exception as e:
                     print(f"Error adding job {job.id}: {e}, {type(job.published_at)}")
+
+        session.commit()
+
+
 
 except Exception as e:
     print(e)
