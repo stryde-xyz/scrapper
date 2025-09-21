@@ -49,7 +49,7 @@ try:
                     # print(f"added {_job_to_add.id}")
                     session.commit()
                 except Exception as e:
-                    print(f"Error adding job {job.id}: {e}")
+                    print(f"Error adding job {job.id}: {e}, {type(job.published_at)}")
 
 except Exception as e:
     print(e)
