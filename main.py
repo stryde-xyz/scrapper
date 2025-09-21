@@ -3,7 +3,9 @@ import sys
 from os.path import join, dirname
 import argparse
 from database import Database
+from greenhouse import load_csv
 from smartrecruiter import SmartRecruiterAll
+from greenhouse import GreenHouseList
 from dotenv import load_dotenv
 
 def main(ats: str):
@@ -20,6 +22,10 @@ def main(ats: str):
                 smartrecruiter_all.start()
             case 'smartrecruiters':
                 print("Hello from scrapper!")
+            case 'greenhouse':
+                company_names = load_csv(f"{os.getcwd()}/greenhouse/companies.csv")
+                greenhoouse_list = GreenHouseList(company_names, database)
+                greenhoouse_list.start()
             case _:
                 print("Invalid ATS type")
     except Exception as e:
