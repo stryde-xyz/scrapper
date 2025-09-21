@@ -4,6 +4,7 @@ import hashlib
 import json
 from database import Job
 from time import sleep
+from dateutil import parser as date_parser
 
 class SmartRecruiterAll:
     def __init__(self, db):
@@ -11,6 +12,7 @@ class SmartRecruiterAll:
         self._jobs_string = ""
         self._prev_hash = None
         self._job_to_add = None
+        self._new_job_to_add = None
         self.jobs = []
         self.db = db
         self.session = self.db.get_session()
@@ -24,10 +26,19 @@ class SmartRecruiterAll:
                     try:
                         if not job['id'] in self._prev_jobs:
                             if self.get_job(job['id'], job['actions']['details']):
+                                # existing_job = self.session.query(Job).filter_by(id=job['id']).first()
+                                # print(existing_job)
+                                # if existing_job == None:
+                                #     # print(f"Job added: {job['id']}")
+                                #     self.session.add(self._job_to_add)
+                                #     self.session.commit()
+                                existing_job = self.session.query(Job).filter_by(id=job['id']).first()
+                                # print(existing_job)
                                 if not self.session.query(Job).filter_by(id=job['id']).first():
-                                    # print(f"Job added: {job['id']}")
                                     self.session.add(self._job_to_add)
                                     self.session.commit()
+
+
                     except Exception as e:
                         print(f"❌ An error occurred: {e}")
 
@@ -52,9 +63,15 @@ class SmartRecruiterAll:
                 <div>{data['jobAd']['sections']['additionalInformation']['title']}</div>
                 {data['jobAd']['sections']['additionalInformation']['text']}
                 """
-                self._job_to_add = Job(id=job_id, name=data['name'], internal_job_id=data['id'], published_at=data['releasedDate'],
-                    updated_at=data['releasedDate'],  apply_url = data['postingUrl'],content = html_content, location = data['location']['city'],
+                # self._job_to_add = Job(id=job_id, name=data['name'], internal_job_id=data['id'], published_at=data['releasedDate'],
+                #     updated_at=data['releasedDate'],  apply_url = data['postingUrl'],content = html_content, location = data['location']['city'],
+                #     company = data['company']['name'])
+                # print(date_parser.parse(data['releasedDate']))
+                # print(data)
+                self._job_to_add = Job(id=job_id, name=data['name'], internal_job_id=data['id'], published_at=date_parser.parse(data['releasedDate']),
+                    updated_at=date_parser.parse(data['releasedDate']),  apply_url = data['postingUrl'],content = html_content, location = data['location']['city'],
                     company = data['company']['name'])
+                # print(self._job_to_add)
                 return True
             else:
                 print(f"❌ Failed to retrieve job details: {response.status_code}")
