@@ -33,9 +33,9 @@ class GreenHouseList:
                             if existing_job is None:
                                 self.session.add(Job(id=job['id'], name=job['title'], internal_job_id = job['internal_job_id'], published_at=job['published_at'],
                                 updated_at = job['updated_at'], apply_url=job['absolute_url'], content=job['content'], location=job['location'], company=company))
-                                print(f"added job {job['id']}")
+                                # print(f"added job {job['id']}")
                             else:
-                                print(f"job exists {job['id']}")
+                                # print(f"job exists {job['id']}")
                                 pass
             self.session.commit()
 
