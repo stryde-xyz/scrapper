@@ -30,7 +30,7 @@ try:
         old_jobs = session.query(OldJob).offset(page * 100).limit(100).all()
         for job in old_jobs:
             existin_job = session.query(Job).filter_by(id=job.id).first()
-            print(existin_job)
+            # print(existin_job)
             if existin_job is None:
                 html_content = html.unescape(str(job.content))
                 published_at = parser.parse(str(job.published_at))
