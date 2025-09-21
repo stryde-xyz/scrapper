@@ -35,6 +35,7 @@ class SmartRecruiterAll:
                                 existing_job = self.session.query(Job).filter_by(id=job['id']).first()
                                 # print(existing_job)
                                 if not self.session.query(Job).filter_by(id=job['id']).first():
+                                    print(f"Job added: {job['id']}")
                                     self.session.add(self._job_to_add)
                                     self.session.commit()
 
