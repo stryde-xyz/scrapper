@@ -34,9 +34,11 @@ try:
             if existin_job is None:
                 try:
                     html_content = html.unescape(str(job.content))
-                    published_at = parser.parse(str(job.published_at))
+                    published_at = None
                     if job.published_at is Null:
                         published_at = parser.parse(str(job.updated_at))
+                    else:
+                        published_at = parser.parse(str(job.published_at))
                     updated_at = parser.parse(str(job.updated_at))
 
                     _job_to_add = Job(id=job.id, name=job.name, internal_job_id=job.internal_job_id, published_at=published_at,
