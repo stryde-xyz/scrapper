@@ -36,6 +36,22 @@ class Job(Base):
     def __repr__(self):
         return f"Job(id={self.id}, name={self.name}, internal_job_id={self.internal_job_id}, published_at={self.published_at}, updated_at={self.updated_at}, apply_url={self.apply_url}, content={self.content}, location={self.location}, company={self.company})"
 
+class OldJob(Base):
+    __tablename__ = 'jobs'
+
+    id = Column(BigInteger, primary_key=True)
+    name = Column(String)
+    internal_job_id = Column(BigInteger)
+    published_at = Column(String)
+    updated_at = Column(String)
+    apply_url = Column(String)
+    content = Column(String)
+    location = Column(String)
+    company = Column(String)
+
+    def __repr__(self):
+        return f"OldJob(id={self.id}, name={self.name}, internal_job_id={self.internal_job_id}, published_at={self.published_at}, updated_at={self.updated_at}, apply_url={self.apply_url}, content={self.content}, location={self.location}, company={self.company})"
+
 # class NewJob(NewBase):
 #     __tablename__ = "new_jobs"
 
