@@ -35,7 +35,7 @@ try:
                 try:
                     html_content = html.unescape(str(job.content))
                     published_at = None
-                    if job.published_at is Null:
+                    if job.published_at is None:
                         published_at = parser.parse(str(job.updated_at))
                     else:
                         published_at = parser.parse(str(job.published_at))
