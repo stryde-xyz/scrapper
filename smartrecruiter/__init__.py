@@ -1,0 +1,1 @@
+from smartrecruiter.all import SmartRecruiterAll
