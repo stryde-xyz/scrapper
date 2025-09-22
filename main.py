@@ -25,7 +25,6 @@ def main(ats: str):
                 print("Hello from scrapper!")
             case 'greenhouse':
                 company_names = load_csv(f"{os.getcwd()}/greenhouse/companies.csv")
-                print(company_names)
                 greenhoouse_list = GreenHouseList(company_names, database)
                 greenhoouse_list.start()
             case 'workable':

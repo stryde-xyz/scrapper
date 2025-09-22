@@ -59,4 +59,4 @@ class GreenHouseList:
                             pass
                     self.session.commit()
         except Exception as e:
-            print(f"Error adding job {job['id']}: {e}")
+            print(f"Error adding job{e}")
