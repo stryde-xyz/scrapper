@@ -4,6 +4,7 @@ import requests
 from database import Job
 from dateutil import parser
 import html
+from loguru import logger
 
 class GreenHouseList:
     def __init__(self, companies, db):
@@ -12,14 +13,15 @@ class GreenHouseList:
         self.session = self.db.get_session()
 
     def start(self):
-        # while True:
-        try:
-            for company in self._companies:
-                self.process_company(company)
-                sleep(0.1)
-        except Exception as e:
-            print(f"Error processing {e}")
-
+        while True:
+            try:
+                for company in self._companies:
+                    self.process_company(company)
+                    logger.info(f"Processed company {company}")
+                    sleep(0.1)
+            except Exception as e:
+                print(f"Error processing {e}")
+                logger.error(f"Error processing {e}")
 
     def process_company(self, company):
         try:
