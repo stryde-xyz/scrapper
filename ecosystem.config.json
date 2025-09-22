@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "name": "smartrecruiter-all",
+      "script": "main.py",
+      "args": ["smartrecruiters-all"],
+      "instances": "1",
+      "wait_ready": true,
+      "autorestart": true,
+      "interpreter": "./.venv/bin/python"
+    },
+    {
+      "name": "greenhouse",
+      "script": "main.py",
+      "args": ["greenhouse"],
+      "instances": "1",
+      "wait_ready": true,
+      "autorestart": true,
+      "interpreter": "./.venv/bin/python"
+    }
+  ]
+}
